@@ -7,14 +7,17 @@ import { useEffect } from "react"
 
 import axios from "axios"
 
-import fetchdetails from "/home/saikrishna/cashapona /redux-practice-1/api/src/Redux store/Action creators/fetch.js"
+import { fetchdetails } from "../../Redux store/Action creators/fetch"
 
 import user from "/home/saikrishna/cashapona /redux-practice-1/api/src/Redux store/Reducers/user.js"
 
 const Body = () => {
+
+
     const dispatch = useDispatch()
 
     const { userData } = useSelector(({ user }) => user);
+
 
 
     console.log(userData, "lll")
@@ -30,10 +33,22 @@ const Body = () => {
     //     console.log(response)
     //     //dispatch(updateState(response.data))
     // }
-    useEffect(() => {
-        dispatch(fetchdetails())
-    }, []);
+    let inputVal;
+    const updateInputId = (e) => {
+        inputVal = e.target.value;
 
+    }
+    // let loading = true;
+
+    const getData = () => {
+        dispatch(fetchdetails(inputVal))
+        // loading = false;
+    }
+
+    // useEffect(() => {
+
+    //     dispatch(fetchdetails())
+    // }, []);
 
 
     return (
@@ -41,8 +56,9 @@ const Body = () => {
             textAlign: "center"
         }}>
             <h1 className="heading" >Click to get details of userId</h1>
-            {/* <input type="text" onChange={updateInputId} /> */}
-            {/* <button onClick={getData()}>Click here</button> */}
+            <input type="text" onChange={updateInputId} />
+            <button onClick={getData}>Click here</button>
+            {/* {loading && <p className="loading">Loading....</p>} */}
             <p className="para">{userData.id}</p>
             <p className="para">{userData.title}</p>
             <p className="para">{userData.completed}</p>

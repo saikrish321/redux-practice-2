@@ -3,10 +3,10 @@ import { TYPE } from "../constants/index"
 import axios from "axios"
 
 
-const fetchdetails = () => {
+export const fetchdetails = (i) => {
     return (dispatch) => {
         axios
-            .get("https://jsonplaceholder.typicode.com/todos/2")
+            .get("https://jsonplaceholder.typicode.com/todos/" + i)
             .then((data) => {
                 if (data.status === 200) {
                     dispatch({ type: TYPE, payload: data.data });
@@ -20,4 +20,3 @@ const fetchdetails = () => {
     };
 };
 
-export default fetchdetails;
